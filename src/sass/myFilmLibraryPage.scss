@@ -22,7 +22,7 @@
       position: relative;
       box-sizing: border-box;
       list-style: none;
-      margin: 10px 15px;
+      margin: 10px 0px;
       border-radius: 10px;
       text-align: center;
       width: 100%;
@@ -88,6 +88,7 @@
     &__films-container {
       flex-direction: row;
       &--film {
+        margin: 10px 15px;
         width: 45%;
         max-width: 466px;
       }
