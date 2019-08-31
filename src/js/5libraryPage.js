@@ -55,8 +55,8 @@ function drawQueueFilmList() {
   else {
     libQueueFilmsContainer.innerHTML = "You don't have queue movies to watch. Add them.";
   }
-  refs.queueButton.active = false;
-  refs.watchButton.active = true;
+  refs.queueButton.classList.remove('link-active');
+  refs.watchButton.classList.add('link-active');
 }//drawQueueFilmList
 
 //-----Отрисовать список фильмов, которые уже просмотрены-----//
@@ -77,8 +77,8 @@ function drawWatchedFilmList() {
   else {
     libWatchedFilmsContainer.innerHTML = "You haven't watched any movies. Add them.";
   }
-  refs.queueButton.active = true;
-  refs.watchButton.active = false;
+  refs.queueButton.classList.add('link-active');
+  refs.watchButton.classList.remove('link-active');
 }//drawWatchedFilmList
 
 //-----Добавить селекторы (классы) каждому элементу карточки фильма-----//
