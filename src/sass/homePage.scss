@@ -133,6 +133,9 @@
       &__page {
         width: 38px;
         height: 38px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       
       &__btn {
