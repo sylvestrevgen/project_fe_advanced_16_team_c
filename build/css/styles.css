@@ -439,6 +439,7 @@ ul {
 
 .film__block--wrapper {
   position: relative;
+  cursor: pointer;
 }
 
 .film__block:first-child {
