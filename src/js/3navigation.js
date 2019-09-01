@@ -25,6 +25,9 @@ function activeHomePage(){
   detail.classList.add('hidden');
   libraryWatched.classList.add('hidden');
   libraryQueue.classList.add('hidden');
+  
+  linkHome.classList.add('link-active');
+  linkLibrary.classList.remove('link-active');
 
   fetchPopularMoviesList();
 
@@ -38,6 +41,9 @@ function activeLibraryPage(){
   libBtnSection.classList.remove('hidden');
   homePage.classList.add('hidden');
   detail.classList.add('hidden');
+
+  linkHome.classList.remove('link-active');
+  linkLibrary.classList.add('link-active');
 
   showPageWatch();
 
