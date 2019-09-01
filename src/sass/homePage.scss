@@ -204,6 +204,8 @@
 .film__block--wrapper{
     position: relative;
     cursor: pointer;
+    width: 100%;
+    min-height: 150px;
 }
 .film__block:first-child{
     padding-top: 0;
