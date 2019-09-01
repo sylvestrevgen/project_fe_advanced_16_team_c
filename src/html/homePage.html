@@ -11,12 +11,13 @@
         />
         </div>
       </form>
+      <p class="form__error--paragraf hidden">Error</p>
     </div>
   </section>
 
   <section class="main">
     <ul class="main__block">
-        <li class="film__block">
+        <!-- <li class="film__block">
             <div class="film__block--wrapper">
                 <img src="../images/1024/poster1_1024.jpg" alt="1">
                 <p class="film__block--name">
@@ -69,15 +70,15 @@
                 </p>
                 <div class="overlay"></div>
             </div>
-        </li>
+        </li> -->
     </ul>
   </section>
 
   <section class="section__plaginator">
         <div class="plaginator__container">
-          <button class="plaginator__box--style plaginator__btn--prev">Prev</button>
-          <p class="plaginator__box--style plaginator__page">1</p>
-          <button class="plaginator__box--style plaginator__btn--next">Next</button>
+          <button class="plaginator__box--style plaginator__btn--prev" data-action="button-prev">Prev</button>
+          <p class="plaginator__box--style plaginator__page" data-info="page-number-box"></p>
+          <button class="plaginator__box--style plaginator__btn--next" data-action="button-next">Next</button>
         </div>
       </section>
 </section>
