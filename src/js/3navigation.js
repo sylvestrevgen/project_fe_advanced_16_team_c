@@ -37,7 +37,7 @@ function activeHomePage(){
 };
 
 function activeLibraryPage(){
-  sectionLibBtn.classList.remove('hidden');
+  libBtnSection.classList.remove('hidden');
   homePage.classList.add('hidden');
   detail.classList.add('hidden');
 
