@@ -2,7 +2,7 @@
 
 const API_KEY = 'be5814d92900bfa53e515c0fd30f3d51';
 
-const refs = {
-  watchButton: document.querySelector('button[data-action="watch-button"]'),
-  queueButton: document.querySelector('button[data-action="queue-button"]')
+const libBtns = {
+  watchBtn: document.querySelector('[data-action="watch-button"]'),
+  queueBtn: document.querySelector('[data-action="queue-button"]')
 }
