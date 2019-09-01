@@ -23,6 +23,7 @@ const fetchFilms = () => {
         const filmsListArr = filmsArr.map(filmObj => createCardFunc(filmObj.backdrop_path, filmObj.title, filmObj.id));
         refs.pageContainer.innerHTML = '';
         refs.pageContainer.append(...filmsListArr);
+        renderFilms = filmsArr;
     })
     .catch(err => {
         refs.searchErrMessage.classList.toggle('hidden');
@@ -30,10 +31,11 @@ const fetchFilms = () => {
     })
 }
 
-const searchFilms = event => {
+const searchFilms = () => {
     event.preventDefault();
     inputValue = document.querySelector('.form__search .form__input').value;
     fetchFilms();
+    refs.formSearch.reset();
 }
 
 const plaginationNavigation = event => {
@@ -46,7 +48,13 @@ const plaginationNavigation = event => {
         pageNumber -= 1;
         refs.pageNumber.textContent = pageNumber;
 
-        inputValue ? fetchFilms() : fetchPopularMoviesList();
+        if(inputValue) {
+            fetchFilms();
+
+        } else {
+            fetchPopularMoviesList();
+            inputValue = '';
+        }
         
         if(pageNumber <= 1) {
             refs.btnPrev.classList.add('plaginator__btn--opacity');
@@ -58,7 +66,13 @@ const plaginationNavigation = event => {
         pageNumber += 1;
         refs.pageNumber.textContent = pageNumber;
         refs.btnPrev.classList.remove('plaginator__btn--opacity');
-        inputValue ? fetchFilms() : fetchPopularMoviesList();
+
+        if(inputValue) {
+            fetchFilms()
+        } else {
+            fetchPopularMoviesList();
+            inputValue = '';
+        }
     }
 }
 
