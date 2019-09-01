@@ -9,10 +9,15 @@ const libFilmImgClass = "__films-container--film-img";    //img
 const libFilmNameClass = "__films-container--film-name";  //p-name
 const libFilmRateClass = "__films-container--film-rate";  //p-rate
 
-//-------Ищем контейнеры для списка фильмов-------\\
+//-----Ищем контейнеры для списка фильмов и кнопки для их отображения-----\\
 
 const libQueueFilmsContainer = document.querySelector(libQueueClass + libFilmsContainerClass);
 const libWatchedFilmsContainer = document.querySelector(libWatchedClass + libFilmsContainerClass);
+
+const libBtns = {
+  watchBtn: document.querySelector('[data-action="watch-button"]'),
+  queueBtn: document.querySelector('[data-action="queue-button"]')
+}
 
 //-------Функции-------\\
 
