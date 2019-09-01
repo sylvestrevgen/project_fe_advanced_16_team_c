@@ -32,70 +32,71 @@ const monitorButtonStatusText = () => {
   } catch (error) {
     console.error(error)
   }
+}
 
-  const toggleToQueue = () => {
-    let queueArr = [];
-    try {
-      const queuedFilms = localStorage.getItem('filmsQueue');
-      const queuedFilmsParsed = JSON.parse(queuedFilms);
-      if (queuedFilmsParsed) {
-        queueArr = [...queuedFilmsParsed];
-      }
-      if (queueArr.includes(selectFilm)) {
-        queueArr = queueArr.filter(film => film !== selectFilm);
-      } else {
-        queueArr.push(selectFilm);
-      }
-      localStorage.setItem('filmsQueue', JSON.stringify(queueArr));
-    } catch (error) {
-      console.error(error);
+const toggleToQueue = () => {
+  let queueArr = [];
+  try {
+    const queuedFilms = localStorage.getItem('filmsQueue');
+    const queuedFilmsParsed = JSON.parse(queuedFilms);
+    if (queuedFilmsParsed) {
+      queueArr = [...queuedFilmsParsed];
     }
-
-    monitorButtonStatusText();
-  }
-
-  const toggleToWatched = () => {
-    let watchedArr = [];
-    try {
-      const watchedFilms = localStorage.getItem('filmsWatched');
-      const watchedFilmsParsed = JSON.parse(watchedFilms);
-      if (watchedFilmsParsed) {
-        watchedArr = [...watchedFilmsParsed];
-      }
-      if (watchedArr.includes(selectFilm)) {
-        watchedArr = watchedArr.filter(film => film !== selectFilm);
-      } else {
-        watchedArr.push(selectFilm);
-      }
-      localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
-    } catch (error) {
-      console.error(error);
+    if (queueArr.includes(selectFilm)) {
+      queueArr = queueArr.filter(film => film !== selectFilm);
+    } else {
+      queueArr.push(selectFilm);
     }
-    monitorButtonStatusText();
-
+    localStorage.setItem('filmsQueue', JSON.stringify(queueArr));
+  } catch (error) {
+    console.error(error);
   }
 
-  const showDetails = selectFilm => {
-   
-    poster.src = `https://image.tmdb.org/t/p/w500${selectFilm.poster_path}`;
-    title.textContent = selectFilm.title;
-    vote_average.textContent = selectFilm.vote_average;
-    popularity.textContent = selectFilm.popularity;
-    original_title.textContent = selectFilm.original_title;
+  monitorButtonStatusText();
+}
 
-    const ids = [...selectFilm.genre_ids];
-    
-    const actuallyGenresArr = genres.map(genre => {
-      if(ids.includes(genre.id)) {
-        return genre.name;
-      };
-    });
-
-    const actuallyGenresStr = actuallyGenresArr.join(', ');
-    
-    genre.textContent = actuallyGenresStr;
-    
-    description.textContent = selectFilm.overview;
-
-    monitorButtonStatusText();
+const toggleToWatched = () => {
+  let watchedArr = [];
+  try {
+    const watchedFilms = localStorage.getItem('filmsWatched');
+    const watchedFilmsParsed = JSON.parse(watchedFilms);
+    if (watchedFilmsParsed) {
+      watchedArr = [...watchedFilmsParsed];
+    }
+    if (watchedArr.includes(selectFilm)) {
+      watchedArr = watchedArr.filter(film => film !== selectFilm);
+    } else {
+      watchedArr.push(selectFilm);
+    }
+    localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
+  } catch (error) {
+    console.error(error);
   }
+  monitorButtonStatusText();
+
+}
+
+const showDetails = selectFilm => {
+
+  poster.src = `https://image.tmdb.org/t/p/w500${selectFilm.poster_path}`;
+  title.textContent = selectFilm.title;
+  vote_average.textContent = selectFilm.vote_average;
+  popularity.textContent = selectFilm.popularity;
+  original_title.textContent = selectFilm.original_title;
+
+  const ids = [...selectFilm.genre_ids];
+
+  const actuallyGenresArr = genres.map(genre => {
+    if (ids.includes(genre.id)) {
+      return genre.name;
+    };
+  });
+
+  const actuallyGenresStr = actuallyGenresArr.join(', ');
+
+  genre.textContent = actuallyGenresStr;
+
+  description.textContent = selectFilm.overview;
+
+  monitorButtonStatusText();
+}
