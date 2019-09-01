@@ -41,7 +41,7 @@ function createLibraryCardFunc(imgPath, filmTitle, movieId, voteAverage) {
   const pRate = document.createElement('p');
 
   li.dataset.id = movieId;
-  img.src = imgPath;
+  img.src = `https://image.tmdb.org/t/p/w500/${imgPath}`;
   pTitle.textContent = filmTitle;
   pRate.textContent = voteAverage;
 
@@ -63,7 +63,7 @@ function drawQueueFilmList() {
   if(filmsParsed !== [] && filmsParsed !== "" && filmsParsed !== null) {
 
     filmsParsed.forEach(film => {
-      let li = createLibraryCardFunc(film.poster_path, film.title, film.id, film.vote_average);
+      let li = createLibraryCardFunc(film.backdrop_path, film.title, film.id, film.vote_average);
       addClassesForLibListLi("library-watched", li);
       libQueueFilmsContainer.appendChild(li);
     });
@@ -80,12 +80,13 @@ function drawQueueFilmList() {
 function drawWatchedFilmList() {
   const filmsJSON = localStorage.getItem("filmsWatched")
   let filmsParsed = JSON.parse(filmsJSON);
+  console.log(filmsParsed)
   libWatchedFilmsContainer.innerHTML = '';
   
   if(filmsParsed !== [] && filmsParsed !== "" && filmsParsed !== null) {
     
     filmsParsed.forEach(film => {
-      let li = createLibraryCardFunc(film.imgPath, film.filmTitle, film.movieId, film.voteAverage);
+      let li = createLibraryCardFunc(film.backdrop_path, film.title, film.id, film.vote_average);
       addClassesForLibListLi("library-queue", li);
       libWatchedFilmsContainer.appendChild(li);
     });
@@ -107,6 +108,6 @@ function addClassesForLibListLi(libClass, li) {
   img.classList.add(libClass + "__films-container--film-img");
 
   const p = li.querySelectorAll('p');
-  p[0].classlist.add(libClass + "__films-container--film-name");
+  p[0].classList.add(libClass + "__films-container--film-name");
   p[1].classList.add(libClass + "__films-container--film-rate");
 }
