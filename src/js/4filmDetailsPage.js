@@ -66,7 +66,7 @@ const toggleToWatched = () => {
     const watchedFilmsParsed = JSON.parse(watchedFilms);
     console.log(watchedFilmsParsed)
     if (watchedFilmsParsed) {
-      watchedArr = [...watchedFilmsParsed];
+      watchedArr = watchedFilmsParsed;
     }
     if (watchedArr.includes(selectFilm)) {
       watchedArr = watchedArr.filter(film => film !== selectFilm);
