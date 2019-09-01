@@ -24,22 +24,23 @@ libWatchedFilmsContainer.addEventListener('click', addLibUlListener);
 function addLibUlListener(event) {
   const target = event.target;
   if(target.nodeName === "LI"){
-    activeDetailsPage(target.id, true);
+    activeDetailsPage(target.dataset.id, true);
   }
   if(target.nodeName === "IMG"){
-    activeDetailsPage(target.parentNode.id, true);
+    activeDetailsPage(target.parentNode.dataset.id, true);
   }
 };
 
 //-------Создать карточку библиотечного фильма------------\\
 
-function createLibraryCardFunc(imgPath, filmTitle, voteAverage) {
+function createLibraryCardFunc(imgPath, filmTitle, movieId, voteAverage) {
   
   const li = document.createElement('li');
   const img = document.createElement('img');
   const pTitle = document.createElement('p');
   const pRate = document.createElement('p');
 
+  li.dataset.id = movieId;
   img.src = imgPath;
   pTitle.textContent = filmTitle;
   pRate.textContent = voteAverage;
