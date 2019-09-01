@@ -30,8 +30,6 @@ const monitorButtonStatusText = () => {
       libBtns.watchBtn.textContent = 'Add to watch';
       libBtns.watchBtn.classList.toggle('button-watch');
     }
-    // console.log("storage", filmsWatchedCheckParse);
-    // console.log(libBtns.watchBtn);
 
   } catch (error) {
     console.error(error)
@@ -64,7 +62,6 @@ const toggleToWatched = () => {
   try {
     const watchedFilms = localStorage.getItem("filmsWatched");
     const watchedFilmsParsed = JSON.parse(watchedFilms);
-    console.log(watchedFilmsParsed)
     if (watchedFilmsParsed) {
       watchedArr = watchedFilmsParsed;
     }

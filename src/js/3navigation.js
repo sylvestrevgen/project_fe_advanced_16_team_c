@@ -20,16 +20,14 @@ const libBtns = {
 };
 
 function activeHomePage(){
-  sectionLibBtn.classList.add('hidden');
+  libBtnSection.classList.add('hidden');
   homePage.classList.remove('hidden');
   detail.classList.add('hidden');
   libraryWatched.classList.add('hidden');
   libraryQueue.classList.add('hidden');
-  libBtnSection.classList.add('hidden');
 
   fetchPopularMoviesList();
 
-  fetchPopularMoviesList();
   prev.addEventListener('click', plaginationNavigation);
   next.addEventListener('click', plaginationNavigation);
 
