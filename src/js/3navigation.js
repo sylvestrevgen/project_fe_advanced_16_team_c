@@ -11,10 +11,11 @@ const libraryQueue = document.querySelector('.library-queue'); // (queue page)
 const detail = document.querySelector('.film__container'); // (detali page)
 const AddToWatch = document.querySelector('.button-watch'); // button AddToWatch
 const AddToQueue = document.querySelector('.button-queue'); // button AddToQueue
+const libBtnSection = document.querySelector('.section__library--btn');
 
 const libBtns = {
-  watchBtn: document.querySelector('[data-action="watch-button"]'), // btn watch
-  queueBtn: document.querySelector('[data-action="queue-button"]'), // btn queue
+  watchBtn: document.querySelector('[data-action="lib-watch-button"]'), // btn watch
+  queueBtn: document.querySelector('[data-action="lib-queue-button"]'), // btn queue
 };
 
 function activeHomePage(){
@@ -22,6 +23,9 @@ function activeHomePage(){
   detail.classList.add('hidden');
   libraryWatched.classList.add('hidden');
   libraryQueue.classList.add('hidden');
+  libBtnSection.classList.add('hidden');
+
+  fetchPopularMoviesList();
 
   prev.addEventListener('click', plaginationNavigation);
   next.addEventListener('click', plaginationNavigation);
@@ -33,7 +37,7 @@ function activeLibraryPage(){
   homePage.classList.add('hidden');
   detail.classList.add('hidden');
 
-  drawWatchedFilmList();
+  showPageWatch();
 
   libBtns.watchBtn.removeEventListener('click', showPageWatch);
   libBtns.queueBtn.addEventListener('click', showPageQueue);
@@ -45,6 +49,7 @@ function activeLibraryPage(){
 function showPageWatch(){
   libraryWatched.classList.remove('hidden');
   libraryQueue.classList.add('hidden');
+  libBtnSection.classList.remove('hidden');
   libBtns.watchBtn.removeEventListener('click', showPageWatch);
   libBtns.queueBtn.addEventListener('click', showPageQueue);
   drawWatchedFilmList();
@@ -53,6 +58,7 @@ function showPageWatch(){
 function showPageQueue(){
   libraryWatched.classList.add('hidden');
   libraryQueue.classList.remove('hidden');
+  libBtnSection.classList.remove('hidden');
   libBtns.watchBtn.addEventListener('click', showPageWatch);
   libBtns.queueBtn.removeEventListener('click', showPageQueue);
   drawQueueFilmList();
@@ -62,6 +68,7 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   try {
     homePage.classList.add('hidden');
     detail.classList.remove('hidden');
+    libBtnSection.classList.add('hidden');
     libraryWatched.classList.add('hidden');
     libraryQueue.classList.add('hidden');
 
