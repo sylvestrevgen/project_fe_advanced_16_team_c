@@ -22,90 +22,111 @@ libQueueFilmsContainer.addEventListener('click', addLibUlListener);
 libWatchedFilmsContainer.addEventListener('click', addLibUlListener);
 
 function addLibUlListener(event) {
-  const target = event.target;
-  if(target.nodeName === "LI"){
-    activeDetailsPage(target.dataset.id, true);
+  try {
+    const target = event.target;
+    if(target.nodeName === "LI"){
+      activeDetailsPage(target.dataset.id, true);
+    }
+    if(target.nodeName === "IMG"){
+      activeDetailsPage(target.parentNode.dataset.id, true);
+    }
+  } catch (error) {
+    console.log("addLibUlListener:"+error);
   }
-  if(target.nodeName === "IMG"){
-    activeDetailsPage(target.parentNode.dataset.id, true);
-  }
+
 };
 
 //-------Создать карточку библиотечного фильма------------\\
 
 function createLibraryCardFunc(imgPath, filmTitle, movieId, voteAverage) {
-  
-  const li = document.createElement('li');
-  const img = document.createElement('img');
-  const pTitle = document.createElement('p');
-  const pRate = document.createElement('p');
+  try {
+    const li = document.createElement('li');
+    const img = document.createElement('img');
+    const pTitle = document.createElement('p');
+    const pRate = document.createElement('p');
 
-  li.dataset.id = movieId;
-  img.src = imgPath;
-  pTitle.textContent = filmTitle;
-  pRate.textContent = voteAverage;
+    li.dataset.id = movieId;
+    img.src = imgPath;
+    pTitle.textContent = filmTitle;
+    pRate.textContent = voteAverage;
 
-  li.appendChild(img);
-  li.appendChild(pName);
-  li.appendChild(pRate);
+    li.appendChild(img);
+    li.appendChild(pName);
+    li.appendChild(pRate);
 
-  return li;
+    return li;
+
+  } catch (error) {
+    console.log("createLibraryCardFunc:"+error);
+  }
 }//createLibraryCardFunc
 
 //-----Отрисовать список фильмов, которые в очереди просмотра-----//
 
 function drawQueueFilmList() {
-  
-  let filmsQ = JSON.parse(localStorage.getItem("filmsQueue"));
-  libQueueFilmsContainer.innerHTML = '';
-  
-  if(filmsQ.length !== 0 && filmsQ !== "") {
+  try {
+    let filmsQ = JSON.parse(localStorage.getItem("filmsQueue"));
+    libQueueFilmsContainer.innerHTML = '';
+    
+    if(filmsQ.length !== 0 && filmsQ !== "") {
 
-    filmsQ.forEach(film => {
-      let liQ = createLibraryCardFunc(film.poster_path, film.title, film.id, film.vote_average);
-      addClassesForLibListLi(libQueueClass, liQ);
-      libQueueFilmsContainer.appendChild(liQ);
-    });
+      filmsQ.forEach(film => {
+        let liQ = createLibraryCardFunc(film.poster_path, film.title, film.id, film.vote_average);
+        addClassesForLibListLi(libQueueClass, liQ);
+        libQueueFilmsContainer.appendChild(liQ);
+      });
+    }
+    else {
+      libQueueFilmsContainer.innerHTML = "You don't have queue movies to watch. Add them.";
+    }
+    libBtns.queueButton.classList.remove('link-active');
+    libBtns.watchButton.classList.add('link-active');
+
+  } catch (error) {
+    console.log("drawQueueFilmList:"+error);
   }
-  else {
-    libQueueFilmsContainer.innerHTML = "You don't have queue movies to watch. Add them.";
-  }
-  libBtns.queueButton.classList.remove('link-active');
-  libBtns.watchButton.classList.add('link-active');
 }//drawQueueFilmList
 
 //-----Отрисовать список фильмов, которые уже просмотрены-----//
 
 function drawWatchedFilmList() {
-  
-  let filmsW = JSON.parse(localStorage.getItem("filmsWatched"));
-  libWatchedFilmsContainer.innerHTML = '';
-  
-  if(filmsW.length !== 0 && filmsW !== "") {
+  try {
+    let filmsW = JSON.parse(localStorage.getItem("filmsWatched"));
+    libWatchedFilmsContainer.innerHTML = '';
     
-    filmsW.forEach(film => {
-      let liW = createLibraryCardFunc(film.imgPath, film.filmTitle, film.movieId, film.voteAverage);
-      addClassesForLibListLi(libWachedClass, liW);
-      libWatchedFilmsContainer.appendChild(liW);
-    });
+    if(filmsW.length !== 0 && filmsW !== "") {
+      
+      filmsW.forEach(film => {
+        let liW = createLibraryCardFunc(film.imgPath, film.filmTitle, film.movieId, film.voteAverage);
+        addClassesForLibListLi(libWachedClass, liW);
+        libWatchedFilmsContainer.appendChild(liW);
+      });
+    }
+    else {
+      libWatchedFilmsContainer.innerHTML = "You haven't watched any movies. Add them.";
+    }
+    libBtns.queueButton.classList.add('link-active');
+    libBtns.watchButton.classList.remove('link-active');
+
+  } catch (error) {
+    console.log("drawWatchedFilmList:"+error);
   }
-  else {
-    libWatchedFilmsContainer.innerHTML = "You haven't watched any movies. Add them.";
-  }
-  libBtns.queueButton.classList.add('link-active');
-  libBtns.watchButton.classList.remove('link-active');
 }//drawWatchedFilmList
 
 //-----Добавить селекторы (классы) каждому элементу карточки фильма-----//
 
 function addClassesForLibListLi(libClass, li) {
+  try {
+    li.classList.add(libClass + libFilmClass);
 
-  li.classList.add(libClass + libFilmClass);
+    const img = li.querySelector('img');
+    img.classList.add(libClass + libFilmImgClass);
 
-  const img = li.querySelector('img');
-  img.classList.add(libClass + libFilmImgClass);
+    const p = li.querySelectorAll('p');
+    p[0].classlist.add(libClass + libFilmNameClass);
+    p[1].classList.add(libClass + libFilmRateClass);
 
-  const p = li.querySelectorAll('p');
-  p[0].classlist.add(libClass + libFilmNameClass);
-  p[1].classList.add(libClass + libFilmRateClass);
-}
+  } catch (error) {
+    console.log("addClassesForLibListLi:"+error);
+  }
+}//addClassesForLibListLi
