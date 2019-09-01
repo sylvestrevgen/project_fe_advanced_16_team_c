@@ -11,7 +11,10 @@
   &__container {
     height: 66px;
     display: flex;
+    // flex-wrap: wrap;
+    justify-content: center;
     align-content: center;
+    position: relative;
   }
 
   &__search {
@@ -48,12 +51,18 @@
       color: #000000;
     }
   }
-}
 
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .form__search--icon {
-        background-image:  url(../images/icon-search@2x.png);
-    }
+  &__error--paragraf {
+    width: 257px;
+    font-family: Roboto;
+    font-size: 14.4px;
+    font-weight: 400;
+    line-height: 14.4px;
+    letter-spacing: -0.01em;
+    color: #000000;
+    position: absolute;
+    bottom: 0px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -92,6 +101,7 @@
   &__box--style {
       background-color: #fcfcfc;
       border-radius: 4px;
+      border: none;
       border-right: 2px solid #e4e4e4;
       outline: none;
       font-family: DroidSans;
@@ -104,19 +114,32 @@
   &__page {
       width: 48px;
       height: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
 
   &__btn {
       &--next {
         width: 96px;
         height: 48px;
+        cursor: pointer;
       }
       &--prev {
         width: 96px;
         height: 48px;
+        cursor: pointer;
+      }
+
+      &--opacity {
+        opacity: 0;
       }
   }
 }
+
+
+
+
 
 @media(min-width: 768px) {
   .plaginator {
@@ -141,13 +164,11 @@
       &__btn {
         &--next {
           width: 76px;
-          height: 38px;
-          cursor: pointer;
+          height: 38px;          
         }
         &--prev {
           width: 76px;
           height: 38px;
-          cursor: pointer;
         }
       }
     }
