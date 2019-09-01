@@ -1,33 +1,37 @@
-const poster = document.querySelector('film__list--img');
-const title = document.querySelector('film__name');
-const vote_average = document.querySelector('film--vote');
-const popularity = document.querySelector('film--popularity');
-const original_title = document.querySelector('film--or_title');
-const genre = document.querySelector('film--genre');
-const description = document.querySelector('film__about--description')
+const poster = document.querySelector('.film__list--img');
+const title = document.querySelector('.film__name');
+const vote_average = document.querySelector('.film--vote');
+const popularity = document.querySelector('.film--popularity');
+const original_title = document.querySelector('.film--or_title');
+const genre = document.querySelector('.film--genre');
+const description = document.querySelector('.film__about--description')
 
 const monitorButtonStatusText = () => {
   try {
 
-    const filmsQueueCheck = localStorage.get('filmsQueue');
+    const filmsQueueCheck = localStorage.getItem('filmsQueue');
     let filmsQueueCheckParse = JSON.parse(filmsQueueCheck);
-    if (filmsQueueCheckParse) {
-      refs.queueButton.textContent = 'Delete from queue';
-      refs.queueButton.classList('button-toggle');
+    if (filmsQueueCheckParse.title  === event.target.title) {
+      libBtns.queueBtn.textContent = 'Delete from queue';
+      libBtns.queueBtn.classList.toggle('button-toggle');
     } else {
-      refs.queueButton.textContent = 'Add to queue';
-      refs.queueButton.classList('button-queue');
+      libBtns.queueBtn.textContent = 'Add to queue';
+      libBtns.queueBtn.classList.toggle('button-queue');
     }
 
-    const filmsWatchedCheck = localStorage.get('filmsWatched');
+    const filmsWatchedCheck = localStorage.getItem('filmsWatched');
     const filmsWatchedCheckParse = JSON.parse(filmsWatchedCheck);
     if (filmsWatchedCheckParse) {
-      refs.watchButton.textContent = 'Delete from watched';
-      refs.watchButton.classList('button-toggle');
+      libBtns.watchBtn.textContent = 'Delete from watched';
+      libBtns.watchBtn.classList.toggle('button-toggle');
+      libBtns.watchBtn.classList.toggle('button-watch');
+
     } else {
-      refs.watchButton.textContent = 'Add to watch';
-      refs.queueButton.classList('button-watch');
+      libBtns.watchBtn.textContent = 'Add to watch';
+      libBtns.watchBtn.classList.toggle('button-watch');
     }
+    // console.log("storage", filmsWatchedCheckParse);
+    // console.log(libBtns.watchBtn);
 
   } catch (error) {
     console.error(error)
@@ -58,8 +62,9 @@ const toggleToQueue = () => {
 const toggleToWatched = () => {
   let watchedArr = [];
   try {
-    const watchedFilms = localStorage.getItem('filmsWatched');
+    const watchedFilms = localStorage.getItem("filmsWatched");
     const watchedFilmsParsed = JSON.parse(watchedFilms);
+    console.log(watchedFilmsParsed)
     if (watchedFilmsParsed) {
       watchedArr = [...watchedFilmsParsed];
     }
@@ -67,8 +72,10 @@ const toggleToWatched = () => {
       watchedArr = watchedArr.filter(film => film !== selectFilm);
     } else {
       watchedArr.push(selectFilm);
+      localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
     }
-    localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
+    // console.log("pc", watchedArr);
+    // localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
   } catch (error) {
     console.error(error);
   }
@@ -86,13 +93,11 @@ const showDetails = selectFilm => {
 
   const ids = [...selectFilm.genre_ids];
 
-  const actuallyGenresArr = genres.map(genre => {
-    if (ids.includes(genre.id)) {
-      return genre.name;
-    };
-  });
+  const actuallyGenresArr = genres.filter(genre => ids.includes(genre.id));
+  
+  const actuallyGenresNames = actuallyGenresArr.map(genre => genre.name);
 
-  const actuallyGenresStr = actuallyGenresArr.join(', ');
+  const actuallyGenresStr = actuallyGenresNames.join(', ');
 
   genre.textContent = actuallyGenresStr;
 

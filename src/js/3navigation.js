@@ -8,7 +8,7 @@ const prev = document.querySelector('.plaginator__btn--prev'); // prev
 const next = document.querySelector('.plaginator__btn--next'); // next
 const libraryWatched = document.querySelector('.library-watched'); // (watched page)
 const libraryQueue = document.querySelector('.library-queue'); // (queue page)
-const detail = document.querySelector('.film-container'); // (detali page)
+const detail = document.querySelector('.film__container'); // (detali page)
 const AddToWatch = document.querySelector('.button-watch'); // button AddToWatch
 const AddToQueue = document.querySelector('.button-queue'); // button AddToQueue
 
@@ -18,10 +18,10 @@ const libBtns = {
 };
 
 function activeHomePage(){
-  homePage.classList.remove('.hidden');
-  detail.classList.add('.hidden');
-  libraryWatched.classList.add('.hidden');
-  libraryQueue.classList.add('.hidden');
+  homePage.classList.remove('hidden');
+  detail.classList.add('hidden');
+  libraryWatched.classList.add('hidden');
+  libraryQueue.classList.add('hidden');
 
   prev.addEventListener('click', plaginationNavigation);
   next.addEventListener('click', plaginationNavigation);
@@ -30,8 +30,8 @@ function activeHomePage(){
 };
 
 function activeLibraryPage(){
-  homePage.classList.add('.hidden');
-  detail.classList.add('.hidden');
+  homePage.classList.add('hidden');
+  detail.classList.add('hidden');
 
   drawWachedFilmList();
 
@@ -43,16 +43,16 @@ function activeLibraryPage(){
 };
 
 function showPageWatch(){
-  libraryWatched.classList.remove('.hidden');
-  libraryQueue.classList.add('.hidden');
+  libraryWatched.classList.remove('hidden');
+  libraryQueue.classList.add('hidden');
   libBtns.watchBtn.removeEventListener('click', showPageWatch);
   libBtns.queueBtn.addEventListener('click', showPageQueue);
   drawWatchedFilmList();
 };
 
 function showPageQueue(){
-  libraryWatched.classList.add('.hidden');
-  libraryQueue.classList.remove('.hidden');
+  libraryWatched.classList.add('hidden');
+  libraryQueue.classList.remove('hidden');
   libBtns.watchBtn.addEventListener('click', showPageWatch);
   libBtns.queueBtn.removeEventListener('click', showPageQueue);
   drawQueueFilmList();
@@ -60,10 +60,10 @@ function showPageQueue(){
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
   try {
-    homePage.classList.add('.hidden');
-    detail.classList.remove('.hidden');
-    libraryWatched.classList.add('.hidden');
-    libraryQueue.classList.add('.hidden');
+    homePage.classList.add('hidden');
+    detail.classList.remove('hidden');
+    libraryWatched.classList.add('hidden');
+    libraryQueue.classList.add('hidden');
 
     if (itsLibraryFilm) {
       let array = JSON.parse(localStorage.getItem('filmsQueue'));
