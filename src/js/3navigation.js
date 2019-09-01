@@ -11,6 +11,8 @@ const libraryQueue = document.querySelector('.library-queue'); // (queue page)
 const detail = document.querySelector('.film__container'); // (detali page)
 const AddToWatch = document.querySelector('.button-watch'); // button AddToWatch
 const AddToQueue = document.querySelector('.button-queue'); // button AddToQueue
+const arrow = document.querySelector('.arrow');
+const sectionLibBtn = document.querySelector('.section__library--btn');
 
 const libBtns = {
   watchBtn: document.querySelector('[data-action="watch-button"]'), // btn watch
@@ -18,11 +20,13 @@ const libBtns = {
 };
 
 function activeHomePage(){
+  sectionLibBtn.classList.add('hidden');
   homePage.classList.remove('hidden');
   detail.classList.add('hidden');
   libraryWatched.classList.add('hidden');
   libraryQueue.classList.add('hidden');
 
+  fetchPopularMoviesList();
   prev.addEventListener('click', plaginationNavigation);
   next.addEventListener('click', plaginationNavigation);
 
@@ -30,10 +34,11 @@ function activeHomePage(){
 };
 
 function activeLibraryPage(){
+  sectionLibBtn.classList.remove('hidden');
   homePage.classList.add('hidden');
   detail.classList.add('hidden');
 
-  drawWatchedFilmList();
+  showPageWatch();
 
   libBtns.watchBtn.removeEventListener('click', showPageWatch);
   libBtns.queueBtn.addEventListener('click', showPageQueue);
@@ -88,6 +93,12 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   }
 };
 
+function arrowUp() {
+  window.scrollBy(0, -8000);
+}
+
 linkHome.addEventListener('click', activeHomePage); // link home page
 logo.addEventListener('click', activeHomePage); // logo home page
 linkLibrary.addEventListener('click', activeLibraryPage); // link library page
+
+arrow.addEventListener('click', arrowUp);
