@@ -12,23 +12,24 @@ const monitorButtonStatusText = () => {
     const filmsQueueCheck = localStorage.getItem('filmsQueue');
     let filmsQueueCheckParse = JSON.parse(filmsQueueCheck);
     if (filmsQueueCheckParse.title  === event.target.title) {
-      libBtns.queueBtn.textContent = 'Delete from queue';
-      libBtns.queueBtn.classList.toggle('button-toggle');
+      const filmButtons = querySelectorAll('.film__button--item');
+      filmButtons[0].textContent = 'Delete from queue';
+      filmButtons[0].classList.toggle('button-toggle');
     } else {
-      libBtns.queueBtn.textContent = 'Add to queue';
-      libBtns.queueBtn.classList.toggle('button-queue');
+      filmButtons[0].textContent = 'Add to queue';
+      filmButtons[0].classList.toggle('button-queue');
     }
 
     const filmsWatchedCheck = localStorage.getItem('filmsWatched');
     const filmsWatchedCheckParse = JSON.parse(filmsWatchedCheck);
     if (filmsWatchedCheckParse) {
-      libBtns.watchBtn.textContent = 'Delete from watched';
-      libBtns.watchBtn.classList.toggle('button-toggle');
-      libBtns.watchBtn.classList.toggle('button-watch');
+      filmButtons[1].textContent = 'Delete from watched';
+      filmButtons[1].classList.toggle('button-toggle');
+      filmButtons[1].classList.toggle('button-watch');
 
     } else {
-      libBtns.watchBtn.textContent = 'Add to watch';
-      libBtns.watchBtn.classList.toggle('button-watch');
+      filmButtons[1].textContent = 'Add to watch';
+      filmButtons[1].classList.toggle('button-watch');
     }
 
   } catch (error) {

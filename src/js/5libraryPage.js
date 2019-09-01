@@ -71,8 +71,8 @@ function drawQueueFilmList() {
   else {
     libQueueFilmsContainer.innerHTML = "You don't have queue movies to watch. Add them.";
   }
-  libBtns.queueBtn.classList.remove('library__btn--active');
-  libBtns.watchBtn.classList.add('library__btn--active');
+  libBtns.queueBtn.classList.add('library__btn--active');
+  libBtns.watchBtn.classList.remove('library__btn--active');
 }//drawQueueFilmList
 
 //-----Отрисовать список фильмов, которые уже просмотрены-----//
@@ -80,7 +80,6 @@ function drawQueueFilmList() {
 function drawWatchedFilmList() {
   const filmsJSON = localStorage.getItem("filmsWatched")
   let filmsParsed = JSON.parse(filmsJSON);
-  console.log(filmsParsed)
   libWatchedFilmsContainer.innerHTML = '';
   
   if(filmsParsed !== [] && filmsParsed !== "" && filmsParsed !== null) {
@@ -94,8 +93,8 @@ function drawWatchedFilmList() {
   else {
     libWatchedFilmsContainer.innerHTML = "You haven't watched any movies. Add them.";
   }
-  libBtns.queueBtn.classList.add('library__btn--active');
-  libBtns.watchBtn.classList.remove('library__btn--active');
+  libBtns.queueBtn.classList.remove('library__btn--active');
+  libBtns.watchBtn.classList.add('library__btn--active');
 }//drawWatchedFilmList
 
 //-----Добавить селекторы (классы) каждому "__films-container--film"элементу карточки фильма-----//

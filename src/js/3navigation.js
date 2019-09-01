@@ -34,7 +34,9 @@ function activeHomePage(){
   prev.addEventListener('click', plaginationNavigation);
   next.addEventListener('click', plaginationNavigation);
 
-  homePage.removeEventListener('click', activeHomePage);
+  linkHome.removeEventListener('click', activeHomePage);
+  linkLibrary.addEventListener('click', activeLibraryPage);
+
 };
 
 function activeLibraryPage(){
@@ -51,7 +53,7 @@ function activeLibraryPage(){
   libBtns.queueBtn.addEventListener('click', showPageQueue);
 
   linkLibrary.removeEventListener('click', activeLibraryPage);
-  homePage.addEventListener('click', activeHomePage);
+  linkHome.addEventListener('click', activeHomePage);
 };
 
 function showPageWatch(){
