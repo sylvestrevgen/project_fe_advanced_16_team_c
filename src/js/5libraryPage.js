@@ -1,7 +1,7 @@
 //-----Добавляем селекторы (классы) объектов библиотеки в переменные-----//
 
-const libQueueClass = ".library-queue";                   //section
-const libWatchedClass = ".library-watched";               //section
+const libQueueClass = "library-queue";                   //section
+const libWatchedClass = "library-watched";               //section
 
 const libFilmsContainerClass = "__films-container";       //ul
 const libFilmClass = "__films-container--film";           //li
@@ -11,8 +11,8 @@ const libFilmRateClass = "__films-container--film-rate";  //p-rate
 
 //-----Ищем контейнеры для списка фильмов-----\\
 
-const libQueueFilmsContainer = document.querySelector(libQueueClass + libFilmsContainerClass);
-const libWatchedFilmsContainer = document.querySelector(libWatchedClass + libFilmsContainerClass);
+const libQueueFilmsContainer = document.querySelector('.library-queue__films-container');
+const libWatchedFilmsContainer = document.querySelector('.library-watched__films-container');
 
 //-------Функции-------\\
 
@@ -46,7 +46,7 @@ function createLibraryCardFunc(imgPath, filmTitle, movieId, voteAverage) {
   pRate.textContent = voteAverage;
 
   li.appendChild(img);
-  li.appendChild(pName);
+  li.appendChild(pTitle);
   li.appendChild(pRate);
 
   return li;
@@ -56,15 +56,15 @@ function createLibraryCardFunc(imgPath, filmTitle, movieId, voteAverage) {
 
 function drawQueueFilmList() {
   
-  let filmsQ = JSON.parse(localStorage.getItem("filmsQueue"));
+  let filmsQueue = JSON.parse(localStorage.getItem("filmsQueue"));
   libQueueFilmsContainer.innerHTML = '';
   
-  if(filmsQ.length !== 0 && filmsQ !== "") {
+  if(filmsQueue.length !== 0 && filmsQueue !== "") {
 
-    filmsQ.forEach(film => {
-      let liQ = createLibraryCardFunc(film.poster_path, film.title, film.id, film.vote_average);
-      addClassesForLibListLi(libQueueClass, liQ);
-      libQueueFilmsContainer.appendChild(liQ);
+    filmsQueue.forEach(film => {
+      let liQueue = createLibraryCardFunc(film.poster_path, film.title, film.id, film.vote_average);
+      addClassesForLibListLi("library-watched", liQueue);
+      libQueueFilmsContainer.appendChild(liQueue);
     });
   }
   else {
@@ -85,27 +85,27 @@ function drawWatchedFilmList() {
     
     filmsW.forEach(film => {
       let liW = createLibraryCardFunc(film.imgPath, film.filmTitle, film.movieId, film.voteAverage);
-      addClassesForLibListLi(libWachedClass, liW);
+      addClassesForLibListLi("library-queue", liW);
       libWatchedFilmsContainer.appendChild(liW);
     });
   }
   else {
     libWatchedFilmsContainer.innerHTML = "You haven't watched any movies. Add them.";
   }
-  libBtns.queueButton.classList.add('link-active');
-  libBtns.watchButton.classList.remove('link-active');
+  libBtns.queueBtn.classList.add('link-active');
+  libBtns.watchBtn.classList.remove('link-active');
 }//drawWatchedFilmList
 
-//-----Добавить селекторы (классы) каждому элементу карточки фильма-----//
+//-----Добавить селекторы (классы) каждому "__films-container--film"элементу карточки фильма-----//
 
 function addClassesForLibListLi(libClass, li) {
 
-  li.classList.add(libClass + libFilmClass);
+  li.classList.add(libClass + "__films-container--film");
 
   const img = li.querySelector('img');
-  img.classList.add(libClass + libFilmImgClass);
+  img.classList.add(libClass + "__films-container--film-img");
 
   const p = li.querySelectorAll('p');
-  p[0].classlist.add(libClass + libFilmNameClass);
-  p[1].classList.add(libClass + libFilmRateClass);
+  p[0].classlist.add(libClass + "__films-container--film-name");
+  p[1].classList.add(libClass + "__films-container--film-rate");
 }

@@ -37,6 +37,7 @@ const fetchPopularMoviesList = () => {
             }
         })
         .then(data => {
+            list.innerHTML = '';
             const popular = data.results;
             const filmList = popular.map(el => {
                 return createCardFunc(el.backdrop_path, el.title, el.id)

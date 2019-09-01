@@ -33,7 +33,7 @@ function activeLibraryPage(){
   homePage.classList.add('hidden');
   detail.classList.add('hidden');
 
-  drawWachedFilmList();
+  drawWatchedFilmList();
 
   libBtns.watchBtn.removeEventListener('click', showPageWatch);
   libBtns.queueBtn.addEventListener('click', showPageQueue);
