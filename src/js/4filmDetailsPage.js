@@ -102,11 +102,3 @@ const showDetails = selectFilm => {
 
   monitorButtonStatusText();
 }
-
-function monitorButtonStatusText() {
-  let localStorageFilmsQueue = localStorage.getItem('filmsQueue');
-  localStorageFilmsQueue === null ? AddToQueue.textContent = "Add to queue" : JSON.parse(localStorageFilmsQueue).find(el => el.id === selectFilm.id) ? AddToQueue.textContent = "Delete from queue" : AddToQueue.textContent = "Add to queue";
-
-  let localStorageFilmsWatched = localStorage.getItem('filmsWatched');
-  localStorageFilmsWatched === null ? AddToWatch.textContent = "Add to watched" : JSON.parse(localStorageFilmsWatched).find(el => el.id === selectFilm.id) ? AddToWatch.textContent = "Delete from watched" : AddToWatch.textContent = "Add to watched";
-}
