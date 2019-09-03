@@ -1,5 +1,5 @@
 .footer {
-    position: relative;
+    // position: static;
     height: 100px;
     background-color: #77c1bb;
 }
@@ -12,9 +12,9 @@
 }
 .arrow {
     display: block;
-    top: 20px;
+    bottom: 20px;
     right: 15px;
-    position: absolute;
+    position: fixed;
     background-image: url(../images/arrow.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -25,11 +25,19 @@
     outline: none;
     background-color: #9bddd8;
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.55);
+    opacity: 0.3;
     cursor: pointer;
 }
 
-@media (min-width:768px) {
-    .arrow {
-        display: none;
-    }
+.arrow:hover {
+    opacity: 1;
+    transition: opacity linear 300ms;
 }
+
+// changed Andrey
+// @media (min-width:768px) {
+//     .arrow {
+//         // display: none;
+//     }
+// }
+// changed Andrey -END
