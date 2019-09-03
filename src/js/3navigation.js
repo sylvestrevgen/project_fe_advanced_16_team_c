@@ -14,6 +14,10 @@ const AddToQueue = document.querySelector('.button-queue'); // button AddToQueue
 const libBtnSection = document.querySelector('.section__library--btn');
 const arrow = document.querySelector('.arrow');
 
+// changed Andrey
+const header = document.querySelector('.page-header');
+// changed Andrey -END
+
 const libBtns = {
   watchBtn: document.querySelector('[data-action="lib-watch-button"]'), // btn watch
   queueBtn: document.querySelector('[data-action="lib-queue-button"]'), // btn queue
@@ -28,6 +32,12 @@ function activeHomePage(){
   
   linkHome.classList.add('link-active');
   linkLibrary.classList.remove('link-active');
+
+  // changed Andrey
+  refs.pagePlaginationContainer.removeEventListener('click', plaginationNavigation);
+  pageBeginOptions();
+  inputValue = '';
+  // changed Andrey -END
 
   fetchPopularMoviesList();
 
@@ -105,12 +115,31 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
   }
 };
 
+// changed Andrey
 function arrowUp() {
-  window.scrollBy(0, -8000);
+  if(window.pageYOffset > 0) {
+    window.scrollBy(0, -80);
+  setTimeout(() =>arrowUp(), 20)
+  }
 }
+
+function arrowUpShow() {
+  setTimeout(() => {
+    if(window.pageYOffset > 65) {
+      arrow.classList.remove('hidden')
+    } else if(window.pageYOffset <= 65) {
+      arrow.classList.add('hidden')
+    }
+  }, 300);
+}
+// changed Andrey -END
 
 linkHome.addEventListener('click', activeHomePage); // link home page
 logo.addEventListener('click', activeHomePage); // logo home page
 linkLibrary.addEventListener('click', activeLibraryPage); // link library page
 
 arrow.addEventListener('click', arrowUp);
+
+// changed Andrey
+addEventListener('scroll', arrowUpShow);
+// changed Andrey -END
