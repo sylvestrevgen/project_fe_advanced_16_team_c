@@ -23,6 +23,7 @@ const fetchFilms = () => {
         const filmsListArr = filmsArr.map(filmObj => createCardFunc(filmObj.backdrop_path, filmObj.title, filmObj.id));
         refs.pageContainer.innerHTML = '';
         refs.pageContainer.append(...filmsListArr);
+        renderFilms = filmsArr;
     })
     .catch(err => {
         refs.searchErrMessage.classList.toggle('hidden');
@@ -30,10 +31,26 @@ const fetchFilms = () => {
     })
 }
 
-const searchFilms = event => {
+const pageBeginOptions = () => {
+    pageNumber = 1;
+    refs.pageNumber.textContent = pageNumber;
+    refs.btnPrev.classList.add('plaginator__btn--opacity');
+}
+
+const changePage = requestFunc => {
+    requestFunc();
+    setTimeout(() => {
+        window.scrollBy(0, -8000);
+        refs.pageNumber.textContent = pageNumber;
+    }, 0)
+}
+
+const searchFilms = () => {
     event.preventDefault();
     inputValue = document.querySelector('.form__search .form__input').value;
     fetchFilms();
+    pageBeginOptions();
+    refs.formSearch.reset();
 }
 
 const plaginationNavigation = event => {
@@ -44,9 +61,13 @@ const plaginationNavigation = event => {
         };
 
         pageNumber -= 1;
-        refs.pageNumber.textContent = pageNumber;
 
-        inputValue ? fetchFilms() : fetchPopularMoviesList();
+        if(inputValue) {
+            changePage(fetchFilms);
+        } else {
+            changePage(fetchPopularMoviesList);
+            inputValue = '';
+        }
         
         if(pageNumber <= 1) {
             refs.btnPrev.classList.add('plaginator__btn--opacity');
@@ -56,9 +77,14 @@ const plaginationNavigation = event => {
 
     if(event.target.dataset.action === 'button-next'){
         pageNumber += 1;
-        refs.pageNumber.textContent = pageNumber;
-        refs.btnPrev.classList.remove('plaginator__btn--opacity');
-        inputValue ? fetchFilms() : fetchPopularMoviesList();
+        setTimeout(() => refs.btnPrev.classList.remove('plaginator__btn--opacity'), 300);
+
+        if(inputValue) {
+            changePage(fetchFilms);
+        } else {
+            inputValue = '';
+            changePage(fetchPopularMoviesList);
+        }
     }
 }
 
