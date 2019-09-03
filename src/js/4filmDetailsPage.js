@@ -10,80 +10,77 @@ const monitorButtonStatusText = () => {
   try {
 
     const filmsQueueCheck = localStorage.getItem('filmsQueue');
-    let filmsQueueCheckParse = JSON.parse(filmsQueueCheck);
-    if (filmsQueueCheckParse.title  === event.target.title) {
-      libBtns.queueBtn.textContent = 'Delete from queue';
-      libBtns.queueBtn.classList.toggle('button-toggle');
-    } else {
-      libBtns.queueBtn.textContent = 'Add to queue';
-      libBtns.queueBtn.classList.toggle('button-queue');
+   
+    if (filmsQueueCheck === null) {
+      AddToQueue.textContent = 'Add to queue';
+      // AddToQueue.classList.add('button-queue')
+    } else if(JSON.parse(filmsQueueCheck).find(film=> film.id === selectFilm.id)) {
+      AddToQueue.textContent = 'Delete from queue';
+      // AddToQueue.classList.toggle('button-toggle_q')
+    }else{
+      AddToQueue.textContent = 'Add to queue';
+      // AddToQueue.classList.add('button-queue')
     }
 
     const filmsWatchedCheck = localStorage.getItem('filmsWatched');
-    const filmsWatchedCheckParse = JSON.parse(filmsWatchedCheck);
-    if (filmsWatchedCheckParse) {
-      libBtns.watchBtn.textContent = 'Delete from watched';
-      libBtns.watchBtn.classList.toggle('button-toggle');
-      libBtns.watchBtn.classList.toggle('button-watch');
-
-    } else {
-      libBtns.watchBtn.textContent = 'Add to watch';
-      libBtns.watchBtn.classList.toggle('button-watch');
+  
+    if (filmsWatchedCheck === null) {
+      AddToWatch.textContent = 'Add to watch';
+    } else if(JSON.parse(filmsWatchedCheck).find(film=> film.id === selectFilm.id)) {
+      AddToWatch.textContent = 'Delete from watched';
+    }else{
+      AddToWatch.textContent = 'Add to watch';
     }
-    // console.log("storage", filmsWatchedCheckParse);
-    // console.log(libBtns.watchBtn);
-
   } catch (error) {
     console.error(error)
   }
 }
 
+
 const toggleToQueue = () => {
+
   let queueArr = [];
   try {
     const queuedFilms = localStorage.getItem('filmsQueue');
-    const queuedFilmsParsed = JSON.parse(queuedFilms);
-    if (queuedFilmsParsed) {
-      queueArr = [...queuedFilmsParsed];
-    }
-    if (queueArr.includes(selectFilm)) {
-      queueArr = queueArr.filter(film => film !== selectFilm);
+   
+    if (queuedFilms !==null) {
+      queueArr.push(...JSON.parse(queuedFilms));
+    } 
+    if (queueArr.find(film => film.id === selectFilm.id)) {
+      queueArr = queueArr.filter(film => film.id !== selectFilm.id);
     } else {
       queueArr.push(selectFilm);
     }
     localStorage.setItem('filmsQueue', JSON.stringify(queueArr));
+    monitorButtonStatusText();
   } catch (error) {
     console.error(error);
   }
-
-  monitorButtonStatusText();
 }
 
 const toggleToWatched = () => {
-  let watchedArr = [];
+
   try {
-    const watchedFilms = localStorage.getItem("filmsWatched");
-    const watchedFilmsParsed = JSON.parse(watchedFilms);
-    console.log(watchedFilmsParsed)
-    if (watchedFilmsParsed) {
-      watchedArr = watchedFilmsParsed;
+    let watchedArr = [];
+    let watchedFilms = localStorage.getItem("filmsWatched");
+
+    if (watchedFilms !== null) {
+      watchedArr.push(...JSON.parse(watchedFilms));
     }
-    if (watchedArr.includes(selectFilm)) {
-      watchedArr = watchedArr.filter(film => film !== selectFilm);
+    if (watchedArr.find(film => film.id === selectFilm.id)) {
+      watchedArr = watchedArr.filter(film => film.id !== selectFilm.id);
     } else {
       watchedArr.push(selectFilm);
-      localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
     }
-    // console.log("pc", watchedArr);
-    // localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
+    localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
+    monitorButtonStatusText();
   } catch (error) {
     console.error(error);
   }
-  monitorButtonStatusText();
-
 }
 
 const showDetails = selectFilm => {
+  console.log(selectFilm);
 
   poster.src = `https://image.tmdb.org/t/p/w500${selectFilm.poster_path}`;
   title.textContent = selectFilm.title;
