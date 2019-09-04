@@ -85,33 +85,43 @@ function showPageQueue(){
 };
 
 function activeDetailsPage(movieId, itsLibraryFilm) {
-  try {
-    homePage.classList.add('hidden');
-    detail.classList.remove('hidden');
-    libBtnSection.classList.add('hidden');
-    libraryWatched.classList.add('hidden');
-    libraryQueue.classList.add('hidden');
 
+  try {
+    homePage.classList.add('hidden'); // HIDE - homePage
+    detail.classList.remove('hidden'); // ACTIVE - detail
+    libBtnSection.classList.add('hidden'); // HIDE - libBtnSection
+    libraryWatched.classList.add('hidden'); // HIDE - libraryWatched
+    libraryQueue.classList.add('hidden'); // HIDE - libraryQueue
+
+    // changed Andrey || moviId --> Number(moviId)
     if (itsLibraryFilm) {
-      let array = JSON.parse(localStorage.getItem('filmsQueue'));
-      selectFilm = array.find(el => el.id === movieId);
-      if (selectFilm === undenfined) {
-        array = JSON.parse(localStorage.getItem('filmsWatched'));
-        selectFilm = array.find(el => el.id === movieId);
+      let filmsArr = JSON.parse(localStorage.getItem('filmsQueue'));
+
+      selectFilm = filmsArr.find(filmObj => filmObj.id === Number(movieId));
+
+      if (selectFilm === undefined) {
+        filmsArr = JSON.parse(localStorage.getItem('filmsWatched'));
+        selectFilm = filmsArr.find(el => el.id === Number(movieId));
       }
       showDetails(selectFilm);
     } else {
       let array = renderFilms;
-      selectFilm = array.find(el => el.id === movieId);
+      selectFilm = array.find(el => el.id === Number(movieId));
       showDetails(selectFilm);
     }
+    // changed Andrey -END
 
     AddToWatch.addEventListener('click', toggleToWatched);
     AddToQueue.addEventListener('click', toggleToQueue);
 
+    // changed Andrey
+    linkLibrary.addEventListener('click', activeLibraryPage);
+    // changed Andrey -END
+    
     detail.removeEventListener('click', activeDetailsPage);
+
   } catch (error) {
-    console.log(error);
+    console.log('activeDetailsPage', error);
   }
 };
 

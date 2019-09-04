@@ -65,8 +65,9 @@ const plaginationNavigation = event => {
         if(inputValue) {
             changePage(fetchFilms);
         } else {
-            changePage(fetchPopularMoviesList);
             inputValue = '';
+            changePage(fetchPopularMoviesList);
+            
         }
         
         if(pageNumber <= 1) {
