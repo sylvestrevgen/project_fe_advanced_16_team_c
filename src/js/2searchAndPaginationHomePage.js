@@ -31,10 +31,25 @@ const fetchFilms = () => {
     })
 }
 
+const pageBeginOptions = () => {
+    pageNumber = 1;
+    refs.pageNumber.textContent = pageNumber;
+    refs.btnPrev.classList.add('plaginator__btn--opacity');
+}
+
+const changePage = requestFunc => {
+    requestFunc();
+    setTimeout(() => {
+        window.scrollBy(0, -8000);
+        refs.pageNumber.textContent = pageNumber;
+    }, 0)
+}
+
 const searchFilms = () => {
     event.preventDefault();
     inputValue = document.querySelector('.form__search .form__input').value;
     fetchFilms();
+    pageBeginOptions();
     refs.formSearch.reset();
 }
 
@@ -46,14 +61,13 @@ const plaginationNavigation = event => {
         };
 
         pageNumber -= 1;
-        refs.pageNumber.textContent = pageNumber;
 
         if(inputValue) {
-            fetchFilms();
-
+            changePage(fetchFilms);
         } else {
-            fetchPopularMoviesList();
             inputValue = '';
+            changePage(fetchPopularMoviesList);
+            
         }
         
         if(pageNumber <= 1) {
@@ -64,14 +78,13 @@ const plaginationNavigation = event => {
 
     if(event.target.dataset.action === 'button-next'){
         pageNumber += 1;
-        refs.pageNumber.textContent = pageNumber;
-        refs.btnPrev.classList.remove('plaginator__btn--opacity');
+        setTimeout(() => refs.btnPrev.classList.remove('plaginator__btn--opacity'), 300);
 
         if(inputValue) {
-            fetchFilms()
+            changePage(fetchFilms);
         } else {
-            fetchPopularMoviesList();
             inputValue = '';
+            changePage(fetchPopularMoviesList);
         }
     }
 }

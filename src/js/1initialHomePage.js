@@ -16,7 +16,19 @@ const createCardFunc = function (imgPath, filmTitle, movieId) {
     p.classList.add('film__block--name');
     overlay.classList.add('overlay');
     listItem.dataset.id = movieId;
-    img.setAttribute('src', `https://image.tmdb.org/t/p/w500/${imgPath}`);
+
+    // changed Andrey
+    img.classList.add('film__block--img')
+    if(imgPath){
+        img.setAttribute('src', `https://image.tmdb.org/t/p/w500/${imgPath}`);
+    } else {
+        imgPath = '../images/image-not-found.png';
+        img.setAttribute('src', `${imgPath}`);
+        img.classList.remove('film__block--img');
+        img.classList.add('film__block--img-not-find');
+    }
+    // changed Andrey -END
+
     img.setAttribute('alt', filmTitle);
     p.textContent = `${filmTitle}`;
     listItem.append(wrapperBlock);
