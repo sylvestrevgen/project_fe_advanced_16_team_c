@@ -23,12 +23,16 @@ const libBtns = {
   queueBtn: document.querySelector('[data-action="lib-queue-button"]'), // btn queue
 };
 
+const footerWord = document.querySelector('.footer-word'); // link on developers
+const pageDevelopers = document.querySelector('.page-developers'); // page with page developers
+
 function activeHomePage(){
   libBtnSection.classList.add('hidden');
   homePage.classList.remove('hidden');
   detail.classList.add('hidden');
   libraryWatched.classList.add('hidden');
   libraryQueue.classList.add('hidden');
+  pageDevelopers.classList.add('hidden'); 
   
   linkHome.classList.add('link-active');
   linkLibrary.classList.remove('link-active');
@@ -53,6 +57,7 @@ function activeLibraryPage(){
   libBtnSection.classList.remove('hidden');
   homePage.classList.add('hidden');
   detail.classList.add('hidden');
+  pageDevelopers.classList.add('hidden'); 
 
   linkHome.classList.remove('link-active');
   linkLibrary.classList.add('link-active');
@@ -72,6 +77,7 @@ function showPageWatch(){
   libBtnSection.classList.remove('hidden');
   libBtns.watchBtn.removeEventListener('click', showPageWatch);
   libBtns.queueBtn.addEventListener('click', showPageQueue);
+  pageDevelopers.classList.add('hidden'); 
   drawWatchedFilmList();
 };
 
@@ -81,6 +87,7 @@ function showPageQueue(){
   libBtnSection.classList.remove('hidden');
   libBtns.watchBtn.addEventListener('click', showPageWatch);
   libBtns.queueBtn.removeEventListener('click', showPageQueue);
+  pageDevelopers.classList.add('hidden'); 
   drawQueueFilmList();
 };
 
@@ -92,6 +99,8 @@ function activeDetailsPage(movieId, itsLibraryFilm) {
     libBtnSection.classList.add('hidden'); // HIDE - libBtnSection
     libraryWatched.classList.add('hidden'); // HIDE - libraryWatched
     libraryQueue.classList.add('hidden'); // HIDE - libraryQueue
+    pageDevelopers.classList.add('hidden'); 
+    
 
     // changed Andrey || moviId --> Number(moviId)
     if (itsLibraryFilm) {
@@ -153,3 +162,20 @@ arrow.addEventListener('click', arrowUp);
 // changed Andrey
 addEventListener('scroll', arrowUpShow);
 // changed Andrey -END
+
+function showDevelopers() {
+  homePage.classList.add('hidden'); // HIDE - homePage
+  detail.classList.add('hidden'); // ACTIVE - detail
+  libBtnSection.classList.add('hidden'); // HIDE - libBtnSection
+  libraryWatched.classList.add('hidden'); // HIDE - libraryWatched
+  libraryQueue.classList.add('hidden'); // HIDE - libraryQueue
+  pageDevelopers.classList.remove('hidden');
+
+  linkHome.addEventListener('click', activeHomePage); // link home page
+  logo.addEventListener('click', activeHomePage); // logo home page
+  linkLibrary.addEventListener('click', activeLibraryPage); // link library page
+
+  linkLibrary.removeEventListener('click', showDevelopers);
+}
+
+footerWord.addEventListener('click', showDevelopers) // link footer
