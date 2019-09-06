@@ -512,18 +512,19 @@ var libQueueFilmsContainer = document.querySelector('.library-queue__films-conta
 var libWatchedFilmsContainer = document.querySelector('.library-watched__films-container'); //-------Функции-------\\
 //--------Слушатель на ul-------------------\\
 
-libQueueFilmsContainer.addEventListener('click', addLibUlListener);
-libWatchedFilmsContainer.addEventListener('click', addLibUlListener);
+libQueueFilmsContainer.addEventListener('click', addLibUlListener); //это UL
+
+libWatchedFilmsContainer.addEventListener('click', addLibUlListener); //это UL
 
 function addLibUlListener(event) {
-  var target = event.target;
+  var target = event.target; //это может быть LI или IMG
 
   if (target.nodeName === "LI") {
-    activeDetailsPage(target.dataset.id, true);
+    activeDetailsPage(target.dataset.id, true); //берем ID этого блока (LI)
   }
 
   if (target.nodeName === "IMG") {
-    activeDetailsPage(target.parentNode.dataset.id, true);
+    activeDetailsPage(target.parentNode.dataset.id, true); //берем ID родительского блока, то есть LI
   }
 }
 
