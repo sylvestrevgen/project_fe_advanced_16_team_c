@@ -10,11 +10,16 @@ const monitorButtonStatusText = () => {
   try {
 
     const filmsQueueCheck = localStorage.getItem('filmsQueue');
-   
-    if (filmsQueueCheck === null) {
-      AddToQueue.textContent = 'Add to queue';
-      // AddToQueue.classList.add('button-queue')
-    } else if(JSON.parse(filmsQueueCheck).find(film=> film.id === selectFilm.id)) {
+    
+    // changed Andrey
+
+    // if (filmsQueueCheck === null) {
+    //   // AddToQueue.textContent = 'Add to queue';
+    //   // AddToQueue.classList.add('button-queue')
+    // } else 
+        // changed Andrey -END
+        
+    if(JSON.parse(filmsQueueCheck).find(film => film.id === selectFilm.id)) {
       AddToQueue.textContent = 'Delete from queue';
       // AddToQueue.classList.toggle('button-toggle_q')
     }else{
@@ -32,7 +37,7 @@ const monitorButtonStatusText = () => {
       AddToWatch.textContent = 'Add to watch';
     }
   } catch (error) {
-    console.error(error)
+    console.error('monitorButtonStatusText', error)
   }
 }
 
@@ -54,7 +59,7 @@ const toggleToQueue = () => {
     localStorage.setItem('filmsQueue', JSON.stringify(queueArr));
     monitorButtonStatusText();
   } catch (error) {
-    console.error(error);
+    console.error('toggleToQueue', error);
   }
 }
 
@@ -75,12 +80,11 @@ const toggleToWatched = () => {
     localStorage.setItem('filmsWatched', JSON.stringify(watchedArr));
     monitorButtonStatusText();
   } catch (error) {
-    console.error(error);
+    console.error('toggleToWatched',error);
   }
 }
 
 const showDetails = selectFilm => {
-  console.log(selectFilm);
 
   poster.src = `https://image.tmdb.org/t/p/w500${selectFilm.poster_path}`;
   title.textContent = selectFilm.title;
