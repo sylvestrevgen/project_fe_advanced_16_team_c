@@ -18,16 +18,16 @@ const libWatchedFilmsContainer = document.querySelector('.library-watched__films
 
 //--------Слушатель на ul-------------------\\
 
-libQueueFilmsContainer.addEventListener('click', addLibUlListener);
-libWatchedFilmsContainer.addEventListener('click', addLibUlListener);
+libQueueFilmsContainer.addEventListener('click', addLibUlListener);   //это UL
+libWatchedFilmsContainer.addEventListener('click', addLibUlListener); //это UL
 
 function addLibUlListener(event) {
-  const target = event.target;
+  const target = event.target;  //это может быть LI или IMG
   if(target.nodeName === "LI"){
-    activeDetailsPage(target.dataset.id, true);
+    activeDetailsPage(target.dataset.id, true); //берем ID этого блока (LI)
   }
   if(target.nodeName === "IMG"){
-    activeDetailsPage(target.parentNode.dataset.id, true);
+    activeDetailsPage(target.parentNode.dataset.id, true); //берем ID родительского блока, то есть LI
   }
 };
 
