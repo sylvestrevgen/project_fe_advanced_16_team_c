@@ -8,7 +8,6 @@
 }
 
 .library__btn {
-
   &--container {
     display: flex;
     align-items: center;
@@ -39,8 +38,11 @@
 // section library buttons -END
 
 //--------------------------------------------------------------------------
-.library-queue, .library-watched {
+.library-queue,
+.library-watched {
   box-sizing: border-box;
+  height: 100%;
+  min-height: 420px;
   min-width: 320px;
   width: 100%;
   padding: 15px;
@@ -75,12 +77,17 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(to top, #000, transparent, transparent);        
+        background-image: linear-gradient(
+          to top,
+          #000,
+          transparent,
+          transparent
+        );
         opacity: 0.7;
         z-index: 9;
         border-radius: 10px;
       }
-      &-img{
+      &-img {
         display: block;
         margin: 0;
         padding: 0;
@@ -117,15 +124,16 @@
         border-radius: 10px;
         background: #fff;
         z-index: 10;
-      }//--rate
-    }//film__block
-  }//--films-container
-}//library__
+      } //--rate
+    } //film__block
+  } //--films-container
+} //library__
 //--------------------------------------------------------------------------
 
 // tablet-landscape and small laptops
 @media only screen and (min-width: 768px) {
-  .library-queue, .library-watched {
+  .library-queue,
+  .library-watched {
     &__films-container {
       flex-direction: row;
       &--film {
@@ -139,10 +147,10 @@
 
 // laptops and desktop
 @media only screen and (min-width: 1024px) {
-  .library-queue, .library-watched {
+  .library-queue,
+  .library-watched {
     &__films-container {
       max-width: 1024px;
     }
   }
 } // media 1024
-
